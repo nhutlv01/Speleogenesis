@@ -1,0 +1,351 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"U",
+				"UnityEngine"
+			],
+			[
+				"rayCas",
+				"raycast	Physics2D.*(origin, direction, distance, layerMask, minDepth, maxDepth)"
+			],
+			[
+				"getMou",
+				"getMouseButtonDown	Input.*(button)"
+			],
+			[
+				"stre",
+				"strength"
+			],
+			[
+				"Stre",
+				"STRENGTH"
+			],
+			[
+				"calcMa",
+				"calcManaRegen"
+			],
+			[
+				"calc",
+				"calcHealthRegen"
+			],
+			[
+				"calcMax",
+				"calcMaxMana"
+			],
+			[
+				"calcM",
+				"calcMaxArmor"
+			],
+			[
+				"array",
+				"arrayReverse"
+			],
+			[
+				"arr",
+				"arrayReverse"
+			],
+			[
+				"print",
+				"arrayPrint"
+			],
+			[
+				"merge",
+				"mergeSort"
+			],
+			[
+				"size",
+				"sizeRight"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "SpeleoProject.sublime-project",
+			"settings":
+			{
+				"buffer_size": 85,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "using UnityEngine;\nusing System.Collections;\n\npublic class TouchControl : MonoBehaviour {\n\n	// Use this for initialization\n	void Start () {\n		\n	}\n	\n	// Update is called once per frame\n	void Update () {\n		Input input = Input.GetMouseButtonDown(0);\n		if(input)\n			RaycastHit2D ray = \n\n	}\n}\n",
+			"file": "Assets/Resources/Scripts/TouchControl.cs",
+			"file_size": 350,
+			"file_write_time": 130382744342272609,
+			"settings":
+			{
+				"buffer_size": 288,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Resources/Scripts/Player.cs",
+			"settings":
+			{
+				"buffer_size": 4441,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Unity3D Build System/Unity.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"pack con",
+				"Package Control: Remove Package"
+			],
+			[
+				"Packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: list",
+				"Package Control: List Packages"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"package list",
+				"Package Control: List Packages"
+			],
+			[
+				"prefer",
+				"Preferences: Browse Packages"
+			],
+			[
+				"packag",
+				"Package Control: Install Package"
+			],
+			[
+				"package contr",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 559.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/CompleteSharp/CompleteSharp.sublime-settings",
+		"/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/CompleteSharp/CompleteSharp.cs",
+		"/C/Users/markc_000/Documents/AndroidSpeleo/Assets/Resources/Scripts/Player.cs",
+		"/C/Users/markc_000/Documents/my games/DiRT3/hardwaresettings/hardware_settings_config.xml",
+		"/C/Users/markc_000/Documents/AndroidSpeleo/Assets/Resources/Scripts/Attributes.cs",
+		"/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/markc_000/Dropbox/Code/mergeSort.cpp"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "SpeleoProject.sublime-project",
+					"settings":
+					{
+						"buffer_size": 85,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Assets/Resources/Scripts/TouchControl.cs",
+					"settings":
+					{
+						"buffer_size": 288,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								281,
+								281
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Assets/Resources/Scripts/Player.cs",
+					"settings":
+					{
+						"buffer_size": 4441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3727,
+								3727
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1794.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 314.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"unit",
+				"/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings"
+			],
+			[
+				"play",
+				"Player.cs"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 235.0,
+	"status_bar_visible": true
+}

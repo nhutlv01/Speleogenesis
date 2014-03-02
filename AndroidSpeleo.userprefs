@@ -1,0 +1,20 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TouchControl.cs">
+    <Files>
+      <File FileName="Assets\Resources\Scripts\Bar.cs" Line="32" Column="1" />
+      <File FileName="Assets\Resources\Scripts\Board.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Scripts\PaperTile.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Scripts\Player.cs" Line="180" Column="17" />
+      <File FileName="Assets\Resources\Scripts\Tile.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Scripts\Prod.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Scripts\Attributes.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Scripts\CameraControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\TouchControl.cs" Line="16" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
