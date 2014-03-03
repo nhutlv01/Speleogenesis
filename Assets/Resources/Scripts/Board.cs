@@ -10,14 +10,13 @@ public class Board : MonoBehaviour {
 	public GameObject tilePrefab;
 	//public GameObject paperTilePrefab;
 
-
-
 	// Use this for initialization
 	void Start () {
 		for (int y = 0; y < GridHeight; y++) {
 			for (int x = 0; x < GridWidth; x++)
 			{
 				GameObject g = Instantiate(tilePrefab, new Vector3(x,y,0), Quaternion.identity)as GameObject;
+				g.transform.name = string.Format("Tile ({0},{1})",x,y);
 				//GameObject s = Instantiate(paperTilePrefab, new Vector3(x,y,0), new Quaternion(0,0,Random.Range(0,3)*90,0)) as GameObject;
 				g.transform.parent =gameObject.transform;
 				//s.transform.parent = gameObject.transform;

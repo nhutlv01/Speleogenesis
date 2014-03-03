@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"Vector",
+				"Vector2	[class]"
+			],
+			[
+				"Insta",
+				"Instantiate	Object.*(original)"
+			],
+			[
+				"Physics2d",
+				"Physics2D.Raycast	*(origin, direction, distance, layerMask, minDepth, maxDepth)"
+			],
+			[
+				"collider",
+				"collider	Collision2D.*"
+			],
+			[
+				"collid",
+				"collider	GameObject.*"
+			],
+			[
+				"direction",
+				"direction	Ray2D.*"
+			],
+			[
+				"Raycas",
+				"Raycast	NavMesh.*(sourcePosition, targetPosition, hit, passableMask)"
+			],
+			[
+				"RayCasth",
+				"RaycastHit2D	[class]"
+			],
+			[
 				"U",
 				"UnityEngine"
 			],
@@ -72,13 +104,21 @@
 			}
 		},
 		{
-			"contents": "using UnityEngine;\nusing System.Collections;\n\npublic class TouchControl : MonoBehaviour {\n\n	// Use this for initialization\n	void Start () {\n		\n	}\n	\n	// Update is called once per frame\n	void Update () {\n		Input input = Input.GetMouseButtonDown(0);\n		if(input)\n			RaycastHit2D ray = \n\n	}\n}\n",
+			"contents": "using UnityEngine;\nusing System.Collections;\n\npublic class TouchControl : MonoBehaviour {\n\n	// Use this for initialization\n	void Start () {\n		\n	}\n	\n	// Update is called once per frame\n	void Update () {\n		Input input = Input.GetMouseButtonDown(0);\n		Vector2 origin;\n		Vector2 direction;\n		origin = Vector2.position\n		direction = Vector2.zero;\n		if(input)\n			RaycastHit2d hitInfo = Physics2D.Raycast(origin, direction);\n		if(hit != null && hit.collider != null)\n		{\n			Debug.Log(hit.collider.gameObject.name);\n		}\n	}\n}\n",
 			"file": "Assets/Resources/Scripts/TouchControl.cs",
-			"file_size": 350,
-			"file_write_time": 130382744342272609,
+			"file_size": 502,
+			"file_write_time": 130382791531562694,
 			"settings":
 			{
-				"buffer_size": 288,
+				"buffer_size": 517,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/Unity Completions/README.md",
+			"settings":
+			{
+				"buffer_size": 1514,
 				"line_ending": "Unix"
 			}
 		},
@@ -98,6 +138,10 @@
 		"selected_items":
 		[
 			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
 				"pack con",
 				"Package Control: Remove Package"
 			],
@@ -111,10 +155,6 @@
 			],
 			[
 				"Package Control: list",
-				"Package Control: List Packages"
-			],
-			[
-				"packa",
 				"Package Control: List Packages"
 			],
 			[
@@ -226,15 +266,15 @@
 					"file": "Assets/Resources/Scripts/TouchControl.cs",
 					"settings":
 					{
-						"buffer_size": 288,
+						"buffer_size": 517,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								281,
-								281
+								517,
+								517
 							]
 						],
 						"settings":
@@ -243,13 +283,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 39.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/Unity Completions/README.md",
+					"settings":
+					{
+						"buffer_size": 1514,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								415,
+								415
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "Assets/Resources/Scripts/Player.cs",
 					"settings":
 					{
