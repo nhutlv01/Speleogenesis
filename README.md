@@ -1,0 +1,4 @@
+#Speleogenesis
+
+##Summary
+Speleogenesis is a rogue-like survival match-three game with RPG elements. The player is spelunking in a sinkhole when he/she ends up trapped in tunnels that seems to never end! You will venture as far as you can before you die, fighting to survive. By matching up tiles players can harvest wood materials to keep their flame burning, find drinking water, craft makeshift weapons with climbing gear, and scavenge gear from corpses. Each player will choose an archetype role which suits them, such as a brutish warrior with strong melee skills or a hunter that specializes in traps. Level up and learn special moves and abilities so you can fight to survive against increasingly more difficult obstacles. Plan and connect huge combos to devastate your enemy or collect an abundance of resources. Compare your scores with your friends! Unlock new classes and game difficulties as you play! Can you find your way out?
