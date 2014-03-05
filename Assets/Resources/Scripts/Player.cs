@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class Player : MonoBehaviour {
@@ -174,7 +175,6 @@ public class Player : MonoBehaviour {
 
 
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		UpdateBars ();

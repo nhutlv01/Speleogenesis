@@ -3,7 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TouchControl : MonoBehaviour {
-	public List<Tile> tilesTouched = new List <Tile>();
+	public List<Vector2> positions = new List<Vector2>();
+	public List<Tile> tilesTouches = new List<Tile>();
+	bool trace = false;
+
+
+	void Start()
+	{
+
+	}
+	void OnMouseDown()
+	{
+		Debug.Log ("Trace off");
+		trace = true;
+	}
+
+	void OnMouseUp()
+	{
+		Debug.Log ("Trace On");
+		trace = false;
+	}
+
+	void Update()
+	{
+		Vector2 pos = Input.mousePosition;
+		if (trace) {
+			Debug.Log("Add Positions");
+			positions.Add(pos);
+		}
+
+	}
+
+}
+	/*public List<Tile> tilesTouched = new List <Tile>();
 	// Use this for initialization
 	void Start () {
 		
@@ -28,4 +60,4 @@ public class TouchControl : MonoBehaviour {
 				Debug.Log(string.Format("End: {0}",hitInfo.transform.gameObject.name));
 		}
 	}
-}
+}*/

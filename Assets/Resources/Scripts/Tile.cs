@@ -15,11 +15,6 @@ public class Tile : MonoBehaviour {
 		GameObject s = Instantiate(paperTilePrefab, gameObject.transform.position, new Quaternion(0,0,Random.Range(0,3)*90,0)) as GameObject;
 		s.transform.parent = transform;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	//Add neighbors to list
 	public void AddNeighbor(Tile t)
@@ -32,11 +27,6 @@ public class Tile : MonoBehaviour {
 	public void RemoveNeighbor(Tile t)
 	{
 		Neighbors.Remove (t);
-	}
-
-	void OnMouseDown()
-	{
-		Debug.Log ("Clicked", gameObject);
 	}
 
 	void CreateTile()
