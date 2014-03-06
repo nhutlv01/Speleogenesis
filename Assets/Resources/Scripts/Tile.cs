@@ -20,13 +20,17 @@ public class Tile : MonoBehaviour {
 	public void AddNeighbor(Tile t)
 	{
 		Neighbors.Add (t);
-
+	}
+	//Add neighbors to list
+	public void RemoveNeighbor(Tile t)
+	{
+		Neighbors.Remove(t);
 	}
 
 	//Remove neighbors to list
-	public void RemoveNeighbor(Tile t)
+	public void RemoveNeighborAt(int i)
 	{
-		Neighbors.Remove (t);
+		Neighbors.RemoveAt (i);
 	}
 
 	void CreateTile()
@@ -35,8 +39,17 @@ public class Tile : MonoBehaviour {
 		SpriteRenderer sr = GetComponent<SpriteRenderer>();
 		string tilePath = "TileTypes/" + type;
 		sr.sprite = Resources.Load<Sprite>(tilePath);
+	}
 
-
+	public void checkNeighbors()
+	{
+		for(int i = 0; i < Neighbors.Count; i++)
+		{
+			if(Neighbors[i] == null)
+			{
+				RemoveNeighborAt(i);
+			}
+		}
 	}
 
 } 
