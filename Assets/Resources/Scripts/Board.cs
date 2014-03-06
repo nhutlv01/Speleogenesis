@@ -8,10 +8,11 @@ public class Board : MonoBehaviour {
 	public int GridWidth;
 	public int GridHeight;
 	public GameObject tilePrefab;
+	//public List<List<Tile>> tileBoard = new List<List<Tile>> ();
 	public List<Vector2> positions = new List<Vector2>();
 	public List<Tile> tilesTouched = new List<Tile>();
 	bool trace = false;
-	bool firstTile = false;
+	bool bFirstTile = false;
 	string tileType = "";
 
 	// Use this for initialization
@@ -40,9 +41,10 @@ public class Board : MonoBehaviour {
 		Tile tileFound;
 		if (Input.GetMouseButtonDown (0) && !trace) {
 			trace = true;
-			firstTile = true;
+			bFirstTile = true;
 		} else if (Input.GetMouseButtonUp (0) && trace) {
 			trace = false;
+			deleteAllTiles(tilesTouched);
 			tilesTouched.Clear();
 			tileType = "";
 			tileFoundIndex = 0;
@@ -58,17 +60,18 @@ public class Board : MonoBehaviour {
 			if (rayHit.collider != null) {
 				//set tileFound to rayHit Tile
 				tileFound = rayHit.transform.GetComponent<Tile> ();
-				if(firstTile)
+				if(bFirstTile)
 				{
 					Debug.Log ("First Tile");
 					tileType = tileFound.type;
-					firstTile = false;
+					tilesTouched.Add (tileFound);
+					bFirstTile = false;
 				}
 				else{
 					tileFoundIndex = findTiles(tilesTouched, tileFound, ref bTileFound);
 					if(tileType == tileFound.type)
 					{
-						if (!bTileFound) {
+						if (!bTileFound && tileIsNeighbor(tileFound)) {
 						//add to array
 							Debug.Log ("Added Tile {0}", tileFound);
 							tilesTouched.Add (tileFound);
@@ -103,18 +106,26 @@ public class Board : MonoBehaviour {
 		}
 	}
 
-	int findTiles(List<Tile> tilesTouched, Tile toFind, ref bool bTileFound)
+	int findTiles(List<Tile> tileArray, Tile toFind, ref bool bTileFound)
 	{
-		int tileFoundIndex = 0;
-		foreach (Tile t in tilesTouched) {
+		int arrayIndex = 0;
+		foreach (Tile t in tileArray) {
 			//If the tile found is in the array
 			if (toFind.name == t.name) {
 				bTileFound = true;
 				break;
 			} else
-				tileFoundIndex++;
+				arrayIndex++;
 		}
-		return tileFoundIndex;
+		return arrayIndex;
+	}
+
+	bool tileIsNeighbor(Tile tileFound)
+	{
+		bool tileIsNeighbor = false;
+		Tile t = tilesTouched [tilesTouched.Count - 1];
+		findTiles (t.Neighbors, tileFound, ref tileIsNeighbor);
+		return tileIsNeighbor;
 	}
 
 	bool tileIsNotLastTile(Tile tileFound)
@@ -122,6 +133,12 @@ public class Board : MonoBehaviour {
 		return tilesTouched[tilesTouched.Count-1].name != tileFound.name;
 	}
 
+	void deleteAllTiles(List<Tile> tileArray)
+	{
+			foreach (Tile t in tileArray) {
+				Destroy (t.gameObject);
+			}
+	}
 	void Update()
 	{
 		trackPosition ();

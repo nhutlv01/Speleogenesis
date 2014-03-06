@@ -17,12 +17,13 @@ public class Prod : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c)
 	{
-		if(c.tag=="Tile")
+		if(c.tag == "Tile")
 			owner.AddNeighbor (c.GetComponent<Tile> ());
 	}
 
 	void OnTriggerExit2D(Collider2D c)
 	{
-
+		if (c.tag == "Tile")
+			owner.RemoveNeighbor (c.GetComponent<Tile> ());
 	}
 }
