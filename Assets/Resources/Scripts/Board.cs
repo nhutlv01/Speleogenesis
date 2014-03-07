@@ -9,6 +9,7 @@ public class Board : MonoBehaviour {
 	private int GridWidth = 6;
 	private int GridHeight = 6;
 	public GameObject tilePrefab;
+	public GameObject fireLine;
 	public Tile[,] tileBoard = new Tile[6,6]; 
 	public List<Tile> tilesTouched = new List<Tile>();
 	public bool objectsRemoved;
@@ -157,14 +158,27 @@ public class Board : MonoBehaviour {
 	/// </summary>
 	void DrawLines()
 	{
+		LineRenderer l = fireLine.GetComponent<LineRenderer> ();
+		if (tilesTouched.Count >= 1) {
+			if(!l.enabled)
+				l.enabled = true;
+			l.SetVertexCount(tilesTouched.Count);
+			for (int i = 0; i < tilesTouched.Count; i++)
+					fireLine.GetComponent<LineRenderer> ().SetPosition (i, tilesTouched [i].transform.position);
+		} else
+			fireLine.GetComponent<LineRenderer> ().enabled = false;
+			/*
 		Vector3 pos1;
 		Vector3 pos2;
 		for(int i = 0; i < tilesTouched.Count-1; i++)
 		{
 			pos1 = tilesTouched[i].transform.position;
 			pos2 = tilesTouched[i+1].transform.position;
-			Debug.DrawLine(pos1,pos2);
+			//Debug.DrawLine(pos1,pos2);
+			GameObject g = Instantiate(linePrefab, new Vector3(pos1.x,pos1.y,0), Quaternion.identity)as GameObject;
+			g.GetComponent<LineRenderer>().SetPosition(i, pos1);
 		}
+		*/
 	}
 
 	/// <summary>
@@ -197,11 +211,13 @@ public class Board : MonoBehaviour {
 	/// </summary>
 	bool tileIsNeighbor(Tile tileFound)
 	{
-		Tile t = tilesTouched [tilesTouched.Count - 1];
-		if (findTiles (t.Neighbors, tileFound) >= 0)
-				return true;
-		else
-				return false;
+		bool retval = false;
+		if (tilesTouched.Count >= 1) {
+				Tile t = tilesTouched [tilesTouched.Count - 1];
+				if (findTiles (t.Neighbors, tileFound) >= 0)
+						retval = true;
+		}
+		return retval;
 	}
 
 	bool tileIsNotLastTile(Tile tileFound)
