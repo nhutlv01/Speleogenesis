@@ -5,8 +5,10 @@ using System.Collections.Generic;
 public class Tile : MonoBehaviour {
 
 	public List<Tile> Neighbors = new List<Tile>();
-	public string[] TileTypes = {"Armor", "Weapon", "Enemy", "Potion"};
+	public string[] TileTypes = {"Armor", "EnemyWeapon", "Potion"};
+	public string[] SubTypes = {"Enemy", "Weapon"};
 	public string type = "";
+	public string subtype ="";
 	public GameObject paperTilePrefab;
 
 	// Use this for initialization
@@ -35,9 +37,16 @@ public class Tile : MonoBehaviour {
 
 	void CreateTile()
 	{
+		string tilePath;
 		type = TileTypes [Random.Range (0, TileTypes.Length)];
 		SpriteRenderer sr = GetComponent<SpriteRenderer>();
-		string tilePath = "TileTypes/" + type;
+		//if this is a 
+		if (type == "EnemyWeapon") {
+			subtype = SubTypes [Random.Range(0, SubTypes.Length)];
+			tilePath = "TileTypes/" + subtype;
+		}
+		else
+			tilePath = "TileTypes/" + type;
 		sr.sprite = Resources.Load<Sprite>(tilePath);
 	}
 

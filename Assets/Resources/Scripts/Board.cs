@@ -13,6 +13,8 @@ public class Board : MonoBehaviour {
 	public Tile[,] tileBoard = new Tile[6,6]; 
 	public List<Tile> tilesTouched = new List<Tile>();
 	public bool objectsRemoved;
+	public Player playerPrefab;
+	public Player player;
 	bool trace = false;
 	bool bFirstTile = false;
 	string tileType = "";
@@ -25,6 +27,10 @@ public class Board : MonoBehaviour {
 	/// 
 	/// </summary>
 	void Start () {
+
+		player = Instantiate (playerPrefab) as Player;
+
+
 		for (int y = 0; y < GridHeight; y++) {
 			for (int x = 0; x < GridWidth; x++)
 			{
@@ -56,7 +62,7 @@ public class Board : MonoBehaviour {
 
 
 	/// <summary>
-	/// 	void handleInput()
+	/// void handleInput()
 	/// 
 	/// This function handles input from mouse/touch clicks and drags.
 	/// 
@@ -71,6 +77,7 @@ public class Board : MonoBehaviour {
 				//Ending click, end dragging, clear array, delete tiles
 		} else if (Input.GetMouseButtonUp (0) && trace && bMatched3) {
 				trace = false;
+				breakdownTileScore(tileType,tilesTouched.Count);
 				deleteAllTiles (tilesTouched);
 				tilesTouched.Clear ();
 				tileType = "";
@@ -250,4 +257,30 @@ public class Board : MonoBehaviour {
 					tileBoard [x, y] = g.GetComponent<Tile> ();
 				}
 	}
+
+	void breakdownTileScore(string tileType, int arrayLength)
+	{
+		if (tileType == "Potion") {
+			player.currentHealth += arrayLength * player.strength * 1;
+			if (player.currentHealth > player.maxHealth)
+					player.currentHealth = player.maxHealth;
+		} else if (tileType == "Armor") {
+			player.armor += arrayLength * 15;
+			float armorToAdd = (float)arrayLength * (player.salvageMultiplier * 7.0f + 1.15f);
+			if ((player.currentSalvage += armorToAdd) > player.maxSalvage) {
+					player.currentSalvage -= player.maxSalvage;
+					//TODO: player got a salvage level
+				}
+		} else if (tileType == "Enemy")
+		{
+			float xpToAdd = (float)arrayLength* (player.xpMultiplier * 7.0f + 1.15f);
+			if((player.currentXP += xpToAdd) > player.maxXP)
+			{
+				player.currentXP -= player.maxXP;
+				//TODO: player got a new level
+			}
+		}
+	}
 }
+
+

@@ -104,14 +104,71 @@
 			}
 		},
 		{
-			"contents": "using UnityEngine;\nusing System.Collections;\n\npublic class TouchControl : MonoBehaviour {\n\n	// Use this for initialization\n	void Start () {\n		\n	}\n	\n	// Update is called once per frame\n	void Update () {\n		Input input = Input.GetMouseButtonDown(0);\n		Vector2 origin;\n		Vector2 direction;\n		origin = Vector2.position\n		direction = Vector2.zero;\n		if(input)\n			RaycastHit2d hitInfo = Physics2D.Raycast(origin, direction);\n		if(hit != null && hit.collider != null)\n		{\n			Debug.Log(hit.collider.gameObject.name);\n		}\n	}\n}\n",
 			"file": "Assets/Resources/Scripts/TouchControl.cs",
-			"file_size": 502,
-			"file_write_time": 130382791531562694,
 			"settings":
 			{
-				"buffer_size": 517,
+				"buffer_size": 532,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "",
+			"file": "/C/Users/markc_000/AppData/Local/Temp/Temp1_AndroidSpeleo-3_7_2014.zip/AndroidSpeleo/README.md",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Pre 4.7) Describe in your own words the functionality of a DMA. What does the CPU do \nwhile a DMA is running? [5pt] \n \nPre 4.8) In this assignment, we focus on register-based DMA, which is the most basic operation mode of a DMA. Write a C-code excerpt to setup such a DMA transfer of 64bytes with 16bit transfers based from address of a buffer that has the address pBuf. For your implementation assume that the SPORT0 TX FIFO is the destination. Please refer to [B] for details. See Table 6-7 for the Peripheral to DMA mapping. [10pt]\n	\nPre 4.9) Since the DMA is operating independently, the core needs to get notified once the DMA has finished operation. Please write a C code excerpt of how to setup this \ninterrupt. Please assume that the SPORT0 TX FIFO is the destination. See [B], \nTable 5-3 for DMA system interrupt sources and DMA system interrupt to core \nevent mapping. [10pt] \n\nPre 4.10) Read the Wikipedia article about circular buffers [F]. After that, inspect the common code file in the bare-c/common/src directory, queue.c, bufferPool.c and chunk.c, which implements a circular buffer for chunks. Also inspect the code audioTx.c in your skeleton. In the file audioTx.c the function audioTx_isr should attempt to get a chunk already in the tx queue and then configure the TX DMA. Please inspect the audioTx_put function and write C code statements to push pChunk into the audioTx queue. [5pt] \n \nPre 4.11) Assume we use the SPORT TX FIFO which can contain 8 samples in stereo mode and have a configured the CODEC for a 44.1kHz, 16bit stereo audio output. Compute how long does it take to completely drain the FIFO? Show your \ncalculation. [5pt] \n \nPre 4.12) Assuming the core runs at 500MHz, how many core cycles pass during the SPORT \nTX FIFO draining time? Show your calculation. Do you estimate that this time \nwould be enough for reconfiguring a DMA? [5pt]\n\n",
+			"settings":
+			{
+				"buffer_size": 1876,
+				"line_ending": "Windows",
+				"name": "Pre 4.7) Describe in your own words the functional"
+			}
+		},
+		{
+			"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/inc/audioTx.h",
+			"settings":
+			{
+				"buffer_size": 2533,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/main.c",
+			"settings":
+			{
+				"buffer_size": 1956,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/audioPlayer.c",
+			"settings":
+			{
+				"buffer_size": 3971,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/audioRx.c",
+			"settings":
+			{
+				"buffer_size": 5452,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/audioTx.c",
+			"settings":
+			{
+				"buffer_size": 5218,
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -126,8 +183,8 @@
 			"file": "Assets/Resources/Scripts/Player.cs",
 			"settings":
 			{
-				"buffer_size": 4441,
-				"line_ending": "Unix"
+				"buffer_size": 4473,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -191,6 +248,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/audioRx.c",
+		"/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/audioPlayer.c",
 		"/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/CompleteSharp/CompleteSharp.sublime-settings",
 		"/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/CompleteSharp/CompleteSharp.cs",
 		"/C/Users/markc_000/Documents/AndroidSpeleo/Assets/Resources/Scripts/Player.cs",
@@ -232,7 +291,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -266,15 +325,15 @@
 					"file": "Assets/Resources/Scripts/TouchControl.cs",
 					"settings":
 					{
-						"buffer_size": 517,
+						"buffer_size": 532,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								517,
-								517
+								0,
+								0
 							]
 						],
 						"settings":
@@ -283,13 +342,203 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 39.0,
+						"translation.y": 57.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "/C/Users/markc_000/AppData/Local/Temp/Temp1_AndroidSpeleo-3_7_2014.zip/AndroidSpeleo/README.md",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"settings":
+					{
+						"buffer_size": 1876,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								1876
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Pre 4.7) Describe in your own words the functional",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/inc/audioTx.h",
+					"settings":
+					{
+						"buffer_size": 2533,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								613,
+								613
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 741.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/main.c",
+					"settings":
+					{
+						"buffer_size": 1956,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								606,
+								606
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 912.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/audioPlayer.c",
+					"settings":
+					{
+						"buffer_size": 3971,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1767.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/audioRx.c",
+					"settings":
+					{
+						"buffer_size": 5452,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								519,
+								519
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/C/Users/markc_000/Downloads/audio_dma_queue_skel/src/audioTx.c",
+					"settings":
+					{
+						"buffer_size": 5218,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3553,
+								3563
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1008.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "/C/Users/markc_000/AppData/Roaming/Sublime Text 2/Packages/Unity Completions/README.md",
 					"settings":
 					{
@@ -315,19 +564,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 10,
 					"file": "Assets/Resources/Scripts/Player.cs",
 					"settings":
 					{
-						"buffer_size": 4441,
+						"buffer_size": 4473,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3727,
-								3727
+								0,
+								0
 							]
 						],
 						"settings":
