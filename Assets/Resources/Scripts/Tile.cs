@@ -9,6 +9,8 @@ public class Tile : MonoBehaviour {
 	public string[] SubTypes = {"Enemy", "Weapon"};
 	public string type = "";
 	public string subtype ="";
+	public int row;
+	public int column;
 	//public GameObject paperTilePrefab;
 
 	// Use this for initialization
@@ -60,5 +62,4 @@ public class Tile : MonoBehaviour {
 			}
 		}
 	}
-
 } 

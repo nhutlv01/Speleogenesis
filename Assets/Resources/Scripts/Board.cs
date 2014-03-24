@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class Board : MonoBehaviour {
 
 	//Variables
@@ -10,14 +9,18 @@ public class Board : MonoBehaviour {
 	private int GridHeight = 6;
 	public GameObject tilePrefab;
 	public GameObject fireLine;
+	public GameObject tileSpawn;
 	public Tile[,] tileBoard = new Tile[6,6]; 
 	public List<Tile> tilesTouched = new List<Tile>();
 	public bool objectsRemoved;
 	public Player playerPrefab;
 	public Player player;
+	public bool bShifting = false;
 	bool trace = false;
 	bool bFirstTile = false;
 	string tileType = "";
+	private float GridXOffset = -2.525f;
+	private float GridYOffset = 2.0f;
 
 
 	/// <summary>
@@ -30,19 +33,19 @@ public class Board : MonoBehaviour {
 
 		player = Instantiate (playerPrefab) as Player;
 
-
-		for (int y = 0; y < GridHeight; y++) {
-			for (int x = 0; x < GridWidth; x++)
+		for (int x = 0; x < GridWidth; x++) {
+			for (int y = 0; y < GridHeight; y++)
 			{
 				GameObject g = Instantiate(tilePrefab, new Vector3(x,y,0), Quaternion.identity)as GameObject;
 				g.transform.name = string.Format("Tile ({0},{1})",x,y);
 				g.transform.parent =gameObject.transform;
 				tileBoard[x,y] = g.GetComponent<Tile>();
+				g.GetComponent<SliderJoint2D>().anchor = new Vector2(x+GridXOffset, y);
 			}
 				
 		}
 
-		gameObject.transform.position = new Vector3 (-2.525f, -2.0f, 0);
+		gameObject.transform.position = new Vector3 (GridXOffset, GridYOffset, 0);
 	}
 
 	/// <summary>
@@ -55,9 +58,10 @@ public class Board : MonoBehaviour {
 	{
 		handleInput ();
 		trackPosition ();
-		DrawLines();
+		DrawLines ();
 		tilesUpdateNeighbors ();
-		refillGameBoard ();
+		if(!bShifting)
+			shiftColumnsDown ();
 	}
 
 
@@ -110,7 +114,7 @@ public class Board : MonoBehaviour {
 			//Cast a ray at mouse position
 			rayHit = Physics2D.Raycast (pos, Vector2.zero);
 			//if there is a collision
-			if (rayHit.collider != null) {
+			if (rayHit.collider != null ) {
 				//set tileFound to rayHit Tile
 				tileFound = rayHit.transform.GetComponent<Tile> ();
 				//if this is the first tile
@@ -139,13 +143,13 @@ public class Board : MonoBehaviour {
 						//if the tile is not found and is a neighbor of the last tile
 						if (!bTileFound && tileIsNeighbor(tileFound)) {
 						//add to array
-							Debug.Log ("Added Tile {0}", tileFound);
+							Debug.Log ("Added Tile: " + tileFound);
 							tilesTouched.Add (tileFound);
 						}
 						//else it is found in the array, and it wasn't the last tile we dragged over
 						else if (bTileFound && tileIsNotLastTile(tileFound)) {
 							//remove all tiles up to the previous position of this tile in the array
-							Debug.Log(string.Format("Removing tiles {0} - {1}", tileFoundIndex, tilesTouched.Count - tileFoundIndex));
+							Debug.Log("Removing tiles: " + tileFoundIndex + " - " + tilesTouched.Count + tileFoundIndex);
 							tilesTouched.RemoveRange (tileFoundIndex, tilesTouched.Count - tileFoundIndex);
 						}
 						else
@@ -239,23 +243,83 @@ public class Board : MonoBehaviour {
 			}
 	}
 
+	/*
+	void tilesCheckPositions()
+	{
+		if (!tilesAreMoving ()) {
+						for (int y = 0; y < GridHeight; y++) {
+								for (int x = 0; x < GridWidth; x++) {
+										RaycastHit2D rayHit = Physics2D.Raycast (new Vector2 (x - 2.525f, y - 2.0f), Vector2.zero);		
+											if(tileBoard[x,y] != null)
+											{
+												tileBoard [x, y] = rayHit.transform.GetComponent<Tile> ();
+												tileBoard [x,y].transform.name = string.Format("Tile ({0},{1})",x,y);
+											}	
+
+								}
+						}
+				}
+	}*/
+
+	bool tilesAreMoving()
+	{
+		Rigidbody2D[] rigidbodies;
+		rigidbodies = GetComponentsInChildren<Rigidbody2D> ();
+		foreach (Rigidbody2D body in rigidbodies)
+		{
+			if(body.velocity != Vector2.zero)
+				return true;
+		}
+		return false;
+	}
+
 	void tilesUpdateNeighbors()
 	{
-		for (int y = 0; y < GridHeight; y++)
-			for (int x = 0; x < GridWidth; x++)
-				tileBoard [x, y].checkNeighbors ();
+		Tile[] tiles = GetComponentsInChildren<Tile>();
+		foreach (Tile tile in tiles)
+			tile.checkNeighbors ();
+	}
+
+
+	void shiftColumnsDown()
+	{
+		bShifting = true;
+		for (int x = 0; x < GridWidth; x++){
+			for (int y = 0; y < GridHeight; y++){
+				if (tileBoard [x, y] == null) {
+					for(int i = y; i < GridHeight; i++){
+						if(tileBoard[x,i] != null)
+						{
+							Debug.Log ("Shifting Col: " + x + " Row: " + i + " to " + y);
+							tileBoard[x,y] = tileBoard[x,i];
+							tileBoard[x,y].transform.name = string.Format ("Tile ({0},{1})", x, y);
+							tileBoard[x,i] = null;
+							break;
+						}
+					}
+				}	
+			}
+		}
+		refillGameBoard ();
 	}
 
 	void refillGameBoard()
 	{
+		Collider2D spawn = tileSpawn.collider2D;
 		for (int y = 0; y < GridHeight; y++)
 			for (int x = 0; x < GridWidth; x++)
+			{
 				if (tileBoard [x, y] == null) {
-				GameObject g = Instantiate (tilePrefab, new Vector3 (x-2.525f, y-2.0f, 0), Quaternion.identity)as GameObject;
-					g.transform.name = string.Format ("Tile ({0},{1})", x, y);
+					GameObject g = Instantiate (tilePrefab, new Vector3 (x-2.525f, y + 3.7f, 0), Quaternion.identity)as GameObject;
+					g.GetComponent<SliderJoint2D>().anchor = new Vector2(x-2.525f, y-2f);
+					string tileName = string.Format ("Tile ({0},{1})", x, y);
+					g.transform.name = tileName;
+					Debug.Log("Refilling with tile" + tileName);
 					g.transform.parent = gameObject.transform;
 					tileBoard [x, y] = g.GetComponent<Tile> ();
 				}
+           }
+		bShifting = false;
 	}
 
 	void breakdownTileScore(string tileType, int arrayLength)
