@@ -239,7 +239,7 @@ public class Board : MonoBehaviour {
 	void deleteAllTiles(List<Tile> tileArray)
 	{
 			foreach (Tile t in tileArray) {
-				Destroy (t.gameObject);
+				t.dead();
 			}
 	}
 
@@ -335,8 +335,19 @@ public class Board : MonoBehaviour {
 					player.currentSalvage -= player.maxSalvage;
 					//TODO: player got a salvage level
 				}
-		} else if (tileType == "Enemy")
+		} else if (tileType == "EnemyWeapon")
 		{
+			//Count the number of enemies
+
+			//Count the number of weapons
+
+			//Calculate damage
+
+			//Subtract damage from enemy health
+
+			//Calculate number of dead enemies
+
+			//Add xp equivalent to number of enemies killed.
 			float xpToAdd = (float)arrayLength* (player.xpMultiplier * 7.0f + 1.15f);
 			if((player.currentXP += xpToAdd) > player.maxXP)
 			{

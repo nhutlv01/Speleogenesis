@@ -11,6 +11,8 @@ public class Tile : MonoBehaviour {
 	public string subtype ="";
 	public int row;
 	public int column;
+	public GameObject burn;
+
 	//public GameObject paperTilePrefab;
 
 	// Use this for initialization
@@ -61,5 +63,11 @@ public class Tile : MonoBehaviour {
 				RemoveNeighborAt(i);
 			}
 		}
+	}
+
+	public void dead()
+	{
+		GetComponent<Animator> ().SetTrigger("Death");
+		Destroy (this.gameObject, .533f);
 	}
 } 
