@@ -56,9 +56,9 @@
      <Compile Include="Assets\Resources\Scripts\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\Prod.cs" />
      <Compile Include="Assets\Resources\Scripts\Tile.cs" />
+     <Compile Include="Assets\Resources\Scripts\TileSpawn.cs" />
+     <Compile Include="Assets\Resources\Scripts\TileWall.cs" />
      <Compile Include="Assets\Resources\Scripts\TouchControl.cs" />
-     <Compile Include="Assets\TileSpawn.cs" />
-     <Compile Include="Assets\TileWall.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

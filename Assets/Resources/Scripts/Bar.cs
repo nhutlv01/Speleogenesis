@@ -15,9 +15,9 @@ public class Bar : MonoBehaviour {
 		text.gameObject.transform.parent = transform;
 		text.transform.localPosition = Vector3.zero + Offset;
 
-		text.font = Resources.Load ("VerumaiOutline") as Font;
+		text.font = Resources.Load ("Fonts/Lemiesz") as Font;
 		text.renderer.material = text.font.material;
-		text.characterSize = 0.03f;
+		text.characterSize = 0.02f;
 		text.alignment = TextAlignment.Center;
 		text.anchor = TextAnchor.MiddleCenter;
 		text.fontSize = 100;
@@ -26,7 +26,7 @@ public class Bar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		barObject.transform.localScale = new Vector3 (percent * barScale *.01f +.001f, barObject.transform.localScale.y, barObject.transform.localScale.z);
-		text.text = string.Format ("({0},{1})", current, max);
+		text.text = ("(" + Mathf.Round(current) + "," + max + ")");
 
 	}
 }
