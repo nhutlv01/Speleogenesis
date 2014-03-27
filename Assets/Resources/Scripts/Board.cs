@@ -14,7 +14,7 @@ public class Board : MonoBehaviour {
 	public List<Tile> tilesTouched = new List<Tile>();
 	public bool objectsRemoved;
 	public Player playerPrefab;
-	public Player player;
+	private Player player;
 	public bool bShifting = false;
 	bool trace = false;
 	bool bFirstTile = false;
@@ -32,6 +32,7 @@ public class Board : MonoBehaviour {
 	void Start () {
 
 		player = Instantiate (playerPrefab) as Player;
+		player.transform.name = "Player";
 
 		for (int x = 0; x < GridWidth; x++) {
 			for (int y = 0; y < GridHeight; y++)
@@ -305,7 +306,6 @@ public class Board : MonoBehaviour {
 
 	void refillGameBoard()
 	{
-		Collider2D spawn = tileSpawn.collider2D;
 		for (int y = 0; y < GridHeight; y++)
 			for (int x = 0; x < GridWidth; x++)
 			{

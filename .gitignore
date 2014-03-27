@@ -213,3 +213,18 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+
+#############
+## Unity
+#############
+Library/
+Temp/
+ProjectSettings/
+Speleo_64_Data/
+Speleo_Data/
+
+#############
+## Sublime
+#############
+.sublime-project
