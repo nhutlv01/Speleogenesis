@@ -67,7 +67,10 @@ public class Tile : MonoBehaviour {
 
 	public void dead()
 	{
+		transform.position = new Vector3 (transform.position.x, transform.position.y, transform.position.z + 1);
 		GetComponent<Animator> ().SetTrigger("Death");
+		GetComponent<CircleCollider2D> ().enabled = false;
+		GetComponent<Rigidbody2D> ().gravityScale = 0;
 		Destroy (this.gameObject, .533f);
 	}
 } 

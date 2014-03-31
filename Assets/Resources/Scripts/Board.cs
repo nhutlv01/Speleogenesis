@@ -12,7 +12,7 @@ public class Board : MonoBehaviour {
 	public GameObject tileSpawn;
 	public Tile[,] tileBoard = new Tile[6,6]; 
 	public List<Tile> tilesTouched = new List<Tile>();
-	public bool objectsRemoved;
+	public bool objectRemoved;
 	public Player playerPrefab;
 	private Player player;
 	public bool bShifting = false;
@@ -31,6 +31,7 @@ public class Board : MonoBehaviour {
 	/// </summary>
 	void Start () {
 
+		gameObject.transform.position = new Vector3 (0, 0, 1f);
 		player = Instantiate (playerPrefab) as Player;
 		player.transform.name = "Player";
 
@@ -114,6 +115,8 @@ public class Board : MonoBehaviour {
 			pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			//Cast a ray at mouse position
 			rayHit = Physics2D.Raycast (pos, Vector2.zero);
+
+			fireLine.transform.position = new Vector3(pos.x, pos.y, -2);
 			//if there is a collision
 			if (rayHit.collider != null ) {
 				//set tileFound to rayHit Tile
@@ -176,7 +179,7 @@ public class Board : MonoBehaviour {
 				l.enabled = true;
 			l.SetVertexCount(tilesTouched.Count);
 			for (int i = 0; i < tilesTouched.Count; i++)
-					fireLine.GetComponent<LineRenderer> ().SetPosition (i, tilesTouched [i].transform.position);
+				fireLine.GetComponent<LineRenderer> ().SetPosition (i, new Vector3(tilesTouched [i].transform.position.x, tilesTouched [i].transform.position.y, -2));
 		} else
 			fireLine.GetComponent<LineRenderer> ().enabled = false;
 			/*
@@ -310,7 +313,7 @@ public class Board : MonoBehaviour {
 			for (int x = 0; x < GridWidth; x++)
 			{
 				if (tileBoard [x, y] == null) {
-					GameObject g = Instantiate (tilePrefab, new Vector3 (x-2.525f, y + 3.7f, 0), Quaternion.identity)as GameObject;
+					GameObject g = Instantiate (tilePrefab, new Vector3 (x-2.525f, y + 3.7f, -1), Quaternion.identity)as GameObject;
 					g.GetComponent<SliderJoint2D>().anchor = new Vector2(x-2.525f, y-2f);
 					string tileName = string.Format ("Tile ({0},{1})", x, y);
 					g.transform.name = tileName;
