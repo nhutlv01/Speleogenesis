@@ -5,16 +5,15 @@ using System.Collections.Generic;
 public class Board : MonoBehaviour {
 
 	//Variables
-	private int GridWidth = 6;
-	private int GridHeight = 6;
+	public int GridWidth = 6;
+	public int GridHeight = 6;
 	public GameObject tilePrefab;
 	public GameObject fireLine;
 	public GameObject tileSpawn;
 	public Tile[,] tileBoard = new Tile[6,6]; 
 	public List<Tile> tilesTouched = new List<Tile>();
 	public bool objectRemoved;
-	public Player playerPrefab;
-	private Player player;
+	public Player player;
 	public bool bShifting = false;
 	bool trace = false;
 	bool bFirstTile = false;
@@ -32,8 +31,6 @@ public class Board : MonoBehaviour {
 	void Start () {
 
 		gameObject.transform.position = new Vector3 (0, 0, 1f);
-		player = Instantiate (playerPrefab) as Player;
-		player.transform.name = "Player";
 
 		for (int x = 0; x < GridWidth; x++) {
 			for (int y = 0; y < GridHeight; y++)
@@ -358,6 +355,20 @@ public class Board : MonoBehaviour {
 				//TODO: player got a new level
 			}
 		}
+	}
+
+	public int numEnemies()
+	{
+		int counter = 0;
+		for(int x = 0; x < GridWidth; x++)
+		{
+			for(int y = 0; y < GridHeight; y++)
+			{
+				if(tileBoard[x,y].subtype == "Enemy")
+					counter++;
+			}
+		}
+		return counter;
 	}
 }
 

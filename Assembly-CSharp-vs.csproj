@@ -52,13 +52,20 @@
      <Compile Include="Assets\Resources\Scripts\Board.cs" />
      <Compile Include="Assets\Resources\Scripts\ButtonMenu.cs" />
      <Compile Include="Assets\Resources\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\MenuButtonScript.cs" />
+     <Compile Include="Assets\Resources\Scripts\NotificationCenter.cs" />
      <Compile Include="Assets\Resources\Scripts\PaperTile.cs" />
      <Compile Include="Assets\Resources\Scripts\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\Prod.cs" />
      <Compile Include="Assets\Resources\Scripts\Tile.cs" />
      <Compile Include="Assets\Resources\Scripts\TileSpawn.cs" />
      <Compile Include="Assets\Resources\Scripts\TileWall.cs" />
+     <Compile Include="Assets\Resources\Scripts\Timer.cs" />
+     <Compile Include="Assets\Resources\Scripts\TimerBar.cs" />
      <Compile Include="Assets\Resources\Scripts\TouchControl.cs" />
+     <None Include="Assets\Resources\Sprites\UIpack_RPG\Spritesheet\uipack_rpg_sheet.xml" />
+     <None Include="Assets\Resources\Sprites\UIpack_RPG\license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
