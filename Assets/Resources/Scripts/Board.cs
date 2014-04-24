@@ -15,6 +15,7 @@ public class Board : MonoBehaviour {
 	public bool objectRemoved;
 	public Player player;
 	public bool bShifting = false;
+	public bool bPaused = false;
 	bool trace = false;
 	bool bFirstTile = false;
 	string tileType = "";
@@ -29,7 +30,8 @@ public class Board : MonoBehaviour {
 	/// 
 	/// </summary>
 	void Start () {
-
+		NotificationCenter.DefaultCenter.AddObserver(this, "Pause");
+		NotificationCenter.DefaultCenter.AddObserver(this, "Unpause");
 		gameObject.transform.position = new Vector3 (0, 0, 1f);
 
 		for (int x = 0; x < GridWidth; x++) {
@@ -55,12 +57,15 @@ public class Board : MonoBehaviour {
 	/// </summary>
 	void Update()
 	{
-		handleInput ();
-		trackPosition ();
-		DrawLines ();
-		tilesUpdateNeighbors ();
-		if(!bShifting)
-			shiftColumnsDown ();
+		if(!bPaused)
+		{
+			handleInput ();
+			trackPosition ();
+			DrawLines ();
+			tilesUpdateNeighbors ();
+			if(!bShifting)
+				shiftColumnsDown ();
+		}
 	}
 
 
@@ -115,7 +120,8 @@ public class Board : MonoBehaviour {
 
 			fireLine.transform.position = new Vector3(pos.x, pos.y, -2);
 			//if there is a collision
-			if (rayHit.collider != null ) {
+			if(rayHit.collider != null)
+			if (rayHit.collider.tag == "Tile" ) {
 				//set tileFound to rayHit Tile
 				tileFound = rayHit.transform.GetComponent<Tile> ();
 				//if this is the first tile
@@ -369,6 +375,22 @@ public class Board : MonoBehaviour {
 			}
 		}
 		return counter;
+	}
+
+	/////////////////////////////////
+	//Pause
+	/////////////////////////////////
+	void Pause()
+	{
+		bPaused = true;
+	}
+	
+	/////////////////////////////////
+	//Unpause
+	/////////////////////////////////
+	void Unpause()
+	{
+		bPaused = false;
 	}
 }
 

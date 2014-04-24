@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 		public GameObject manaBar;
 		public GameObject xpBar;
 		public GameObject salvageBar;
+		public bool bPaused = false;
 
 		/////////////////////////////////
 		//Character Types
@@ -147,43 +148,49 @@ public class Player : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				//Set up initial values (initalization above not working correctly.
-				level = 1;
-				itemLevel = 1;
-				currentXP = 0;
-				currentSalvage = 0;
-				strengthMultiplier = 1;
-				agilityMultiplier = 1;
-				intelligenceMultiplier = 1;
-				xpMultiplier = 1;
-				salvageMultiplier = 1;
+			NotificationCenter.DefaultCenter.AddObserver(this, "Pause");
+			NotificationCenter.DefaultCenter.AddObserver(this, "Unpause");
 
-				//Set up character
-				if (charType == eCharTypes.Strength) {
-						strength = 25;
-						agility = 20;
-						intelligence = 18;
-				} else if (charType == eCharTypes.Agility) {
-						strength = 20;
-						agility = 25;
-						intelligence = 18;
-				} else if (charType == eCharTypes.Intelligence) {
-						strength = 18;
-						agility = 20;
-						intelligence = 25;
-				}
+			//Set up initial values (initalization above not working correctly.
+			level = 1;
+			itemLevel = 1;
+			currentXP = 0;
+			currentSalvage = 0;
+			strengthMultiplier = 1;
+			agilityMultiplier = 1;
+			intelligenceMultiplier = 1;
+			xpMultiplier = 1;
+			salvageMultiplier = 1;
 
-				updateStats ();
+			//Set up character
+			if (charType == eCharTypes.Strength) {
+					strength = 25;
+					agility = 20;
+					intelligence = 18;
+			} else if (charType == eCharTypes.Agility) {
+					strength = 20;
+					agility = 25;
+					intelligence = 18;
+			} else if (charType == eCharTypes.Intelligence) {
+					strength = 18;
+					agility = 20;
+					intelligence = 25;
+			}
 
-				currentHealth = maxHealth;
-				currentMana = maxMana;
+			updateStats ();
+
+			currentHealth = maxHealth;
+			currentMana = maxMana;
 
 
 		}
 		// Update is called once per frame
 		void Update ()
 		{
+			if(!bPaused)
+			{
 				UpdateBars ();
+			}
 		}
 
 		void UpdateBars ()
@@ -220,8 +227,26 @@ public class Player : MonoBehaviour
 		{
 			currentHealth = currentHealth - damage;
 			if(currentHealth <= 0)
+			{	
+				currentHealth = 0;
 				NotificationCenter.DefaultCenter.PostNotification(this, "PlayerDeath");
+			}
 		}
 
+		/////////////////////////////////
+		//Pause
+		/////////////////////////////////
+		void Pause()
+		{
+			bPaused = true;
+		}
+
+		/////////////////////////////////
+		//Unpause
+		/////////////////////////////////
+		void Unpause()
+		{
+			bPaused = false;
+		}
 
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewGameScript : MonoBehaviour {
+public class ExitMenuButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,8 +13,8 @@ public class NewGameScript : MonoBehaviour {
 	
 	}
 
-	void OnMouseDown()
-	{
-		Application.LoadLevel ("MainGame");
+	void OnMouseDown(){
+
+		NotificationCenter.DefaultCenter.PostNotification(this,"MenuExit");
 	}
 }

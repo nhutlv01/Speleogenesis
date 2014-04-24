@@ -46,18 +46,22 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Resources\Scripts\Attributes.cs" />
      <Compile Include="Assets\Resources\Scripts\BackgroundSize.cs" />
      <Compile Include="Assets\Resources\Scripts\Bar.cs" />
      <Compile Include="Assets\Resources\Scripts\Board.cs" />
      <Compile Include="Assets\Resources\Scripts\ButtonMenu.cs" />
      <Compile Include="Assets\Resources\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Resources\Scripts\ExitMenuButton.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Resources\Scripts\MenuButtonScript.cs" />
+     <Compile Include="Assets\Resources\Scripts\InGameMenuScript.cs" />
+     <Compile Include="Assets\Resources\Scripts\MenuButton.cs" />
+     <Compile Include="Assets\Resources\Scripts\NewGameButton.cs" />
      <Compile Include="Assets\Resources\Scripts\NotificationCenter.cs" />
      <Compile Include="Assets\Resources\Scripts\PaperTile.cs" />
+     <Compile Include="Assets\Resources\Scripts\PauseScript.cs" />
      <Compile Include="Assets\Resources\Scripts\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\Prod.cs" />
+     <Compile Include="Assets\Resources\Scripts\QuitGameButton.cs" />
      <Compile Include="Assets\Resources\Scripts\Tile.cs" />
      <Compile Include="Assets\Resources\Scripts\TileSpawn.cs" />
      <Compile Include="Assets\Resources\Scripts\TileWall.cs" />
