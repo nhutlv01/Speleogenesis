@@ -30,8 +30,8 @@ public class Board : MonoBehaviour {
 	/// 
 	/// </summary>
 	void Start () {
-		NotificationCenter.DefaultCenter.AddObserver(this, "Pause");
-		NotificationCenter.DefaultCenter.AddObserver(this, "Unpause");
+		NotificationCenter.DefaultCenter().AddObserver(this, "Pause");
+		NotificationCenter.DefaultCenter().AddObserver(this, "Unpause");
 		gameObject.transform.position = new Vector3 (0, 0, 1f);
 
 		for (int x = 0; x < GridWidth; x++) {
@@ -360,6 +360,11 @@ public class Board : MonoBehaviour {
 				player.currentXP -= player.maxXP;
 				//TODO: player got a new level
 			}
+		}
+		else if (tileType == "Time")
+		{
+			float timeToAdd = (float)arrayLength * player.timeMultiplier;
+			NotificationCenter.DefaultCenter().PostNotification(this, "AddTime", timeToAdd);
 		}
 	}
 

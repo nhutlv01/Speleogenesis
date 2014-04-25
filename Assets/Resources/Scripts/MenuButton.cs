@@ -15,6 +15,6 @@ public class MenuButton : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		NotificationCenter.DefaultCenter.PostNotification(this, "MenuEnter");
+		NotificationCenter.DefaultCenter().PostNotification(this, "MenuEnter");
 	}
 }

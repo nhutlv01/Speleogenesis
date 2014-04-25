@@ -15,6 +15,6 @@ public class ExitMenuButton : MonoBehaviour {
 
 	void OnMouseDown(){
 
-		NotificationCenter.DefaultCenter.PostNotification(this,"MenuExit");
+		NotificationCenter.DefaultCenter().PostNotification(this,"MenuExit");
 	}
 }

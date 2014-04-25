@@ -6,8 +6,8 @@ public class InGameMenuScript : MonoBehaviour {
 	public bool bMenu = false;
 	// Use this for initialization
 	void Start () {
-		NotificationCenter.DefaultCenter.AddObserver(this, "MenuEnter");
-		NotificationCenter.DefaultCenter.AddObserver(this, "MenuExit");
+		NotificationCenter.DefaultCenter().AddObserver(this, "MenuEnter");
+		NotificationCenter.DefaultCenter().AddObserver(this, "MenuExit");
 		DisableChildren();
 	}
 	
@@ -25,7 +25,7 @@ public class InGameMenuScript : MonoBehaviour {
 			bMenu = true;
 
 			//Pause everything
-			NotificationCenter.DefaultCenter.PostNotification(this, "Pause");
+			NotificationCenter.DefaultCenter().PostNotification(this, "Pause");
 
 		}
 	}
@@ -39,7 +39,7 @@ public class InGameMenuScript : MonoBehaviour {
 			bMenu = false;
 
 			//Unpause everything
-			NotificationCenter.DefaultCenter.PostNotification(this, "Unpause");
+			NotificationCenter.DefaultCenter().PostNotification(this, "Unpause");
 		}
 	}
 

@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
 		public float strengthMultiplier = 1;
 		public float agilityMultiplier = 1;
 		public float intelligenceMultiplier = 1;
+		public float timeMultiplier = 1;
 
 		/////////////////////////////////
 		//Health
@@ -148,8 +149,8 @@ public class Player : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-			NotificationCenter.DefaultCenter.AddObserver(this, "Pause");
-			NotificationCenter.DefaultCenter.AddObserver(this, "Unpause");
+			NotificationCenter.DefaultCenter().AddObserver(this, "Pause");
+			NotificationCenter.DefaultCenter().AddObserver(this, "Unpause");
 
 			//Set up initial values (initalization above not working correctly.
 			level = 1;
@@ -229,7 +230,7 @@ public class Player : MonoBehaviour
 			if(currentHealth <= 0)
 			{	
 				currentHealth = 0;
-				NotificationCenter.DefaultCenter.PostNotification(this, "PlayerDeath");
+				NotificationCenter.DefaultCenter().PostNotification(this, "PlayerDeath");
 			}
 		}
 

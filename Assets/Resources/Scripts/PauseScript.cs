@@ -18,12 +18,12 @@ public class PauseScript : MonoBehaviour {
 	{
 		if(!bPaused)
 		{
-			NotificationCenter.DefaultCenter.PostNotification(this, "Pause");
+			NotificationCenter.DefaultCenter().PostNotification(this, "Pause");
 			bPaused = true;
 		}
 		else
 		{
-			NotificationCenter.DefaultCenter.PostNotification(this, "Unpause");
+			NotificationCenter.DefaultCenter().PostNotification(this, "Unpause");
 			bPaused = false;
 		}
 	}

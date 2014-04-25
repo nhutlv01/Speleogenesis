@@ -68,7 +68,10 @@
      <Compile Include="Assets\Resources\Scripts\Timer.cs" />
      <Compile Include="Assets\Resources\Scripts\TimerBar.cs" />
      <Compile Include="Assets\Resources\Scripts\TouchControl.cs" />
+     <None Include="Assets\Vectrosity\What to import!.txt" />
+     <None Include="Assets\Vectrosity\Documentation\Vectrosity changelog.txt" />
      <None Include="Assets\Resources\Sprites\UIpack_RPG\Spritesheet\uipack_rpg_sheet.xml" />
+     <None Include="Assets\Vectrosity\Documentation\Vectrosity Upgrade Guide.txt" />
      <None Include="Assets\Resources\Sprites\UIpack_RPG\license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
