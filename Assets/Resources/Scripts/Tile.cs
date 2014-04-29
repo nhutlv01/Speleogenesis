@@ -18,6 +18,7 @@ public class Tile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		CreateTile ();
+		NotificationCenter.DefaultCenter().AddObserver(this, "TimerTrigger");
 		//GameObject s = Instantiate(paperTilePrefab, gameObject.transform.position, new Quaternion(0,0,Random.Range(0,3)*90,0)) as GameObject;
 		//s.transform.parent = transform;
 	}
@@ -71,6 +72,13 @@ public class Tile : MonoBehaviour {
 		GetComponent<Animator> ().SetTrigger("Death");
 		GetComponent<CircleCollider2D> ().enabled = false;
 		GetComponent<Rigidbody2D> ().gravityScale = 0;
+		GetComponent<Rigidbody2D> ().AddForce(new Vector2(Random.Range(0, 2), Random.Range(0,2)));
 		Destroy (this.gameObject, .533f);
+	}
+
+	public void TimerTrigger()
+	{
+		if(subtype == "Enemy")
+			GetComponent<Animator> ().SetTrigger("EnemyAttack");
 	}
 } 
