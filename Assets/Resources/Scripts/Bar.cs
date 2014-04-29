@@ -15,6 +15,8 @@ public class Bar : MonoBehaviour {
 		textmesh = text.AddComponent ("TextMesh") as TextMesh;
 		text.transform.parent = transform;
 		text.transform.position = text.transform.parent.position + Vector3.back;
+		text.GetComponent<Renderer>().sortingLayerName = "GUI";
+		text.GetComponent<Renderer>().sortingOrder = 1;
 		Debug.Log ("Text Transform Position: " + text.transform.position.x + " " + text.transform.position.y + " " + text.transform.position.z);
 
 		textmesh.font = Resources.Load ("Fonts/Lemiesz") as Font;
@@ -23,6 +25,8 @@ public class Bar : MonoBehaviour {
 		textmesh.alignment = TextAlignment.Center;
 		textmesh.anchor = TextAnchor.MiddleCenter;
 		textmesh.fontSize = 100;
+
+		
 	}
 	
 	// Update is called once per frame

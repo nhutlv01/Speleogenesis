@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Vectrosity;
+
 
 public class Board : MonoBehaviour {
 
@@ -8,8 +10,8 @@ public class Board : MonoBehaviour {
 	public int GridWidth = 6;
 	public int GridHeight = 6;
 	public GameObject tilePrefab;
-	public GameObject fireLine;
 	public GameObject tileSpawn;
+	public VectorLine arrayLine;
 	public Tile[,] tileBoard = new Tile[6,6]; 
 	public List<Tile> tilesTouched = new List<Tile>();
 	public bool objectRemoved;
@@ -45,7 +47,10 @@ public class Board : MonoBehaviour {
 			}
 				
 		}
+		arrayLine = new VectorLine("MyLine", new Vector3[100], Color.green, null, 5.0f, LineType.Continuous, Joins.Fill);
+		arrayLine.ZeroPoints();
 
+		
 		gameObject.transform.position = new Vector3 (GridXOffset, GridYOffset, 0);
 	}
 
@@ -118,7 +123,6 @@ public class Board : MonoBehaviour {
 			//Cast a ray at mouse position
 			rayHit = Physics2D.Raycast (pos, Vector2.zero);
 
-			fireLine.transform.position = new Vector3(pos.x, pos.y, -2);
 			//if there is a collision
 			if(rayHit.collider != null)
 			if (rayHit.collider.tag == "Tile" ) {
@@ -127,7 +131,7 @@ public class Board : MonoBehaviour {
 				//if this is the first tile
 				if(bFirstTile)
 				{
-					Debug.Log ("First Tile");
+					//Debug.Log ("First Tile");
 					//Set the type of drag to this tile's type
 					tileType = tileFound.type;
 					//Add tile to the array
@@ -150,13 +154,13 @@ public class Board : MonoBehaviour {
 						//if the tile is not found and is a neighbor of the last tile
 						if (!bTileFound && tileIsNeighbor(tileFound)) {
 						//add to array
-							Debug.Log ("Added Tile: " + tileFound);
+							//Debug.Log ("Added Tile: " + tileFound);
 							tilesTouched.Add (tileFound);
 						}
 						//else it is found in the array, and it wasn't the last tile we dragged over
 						else if (bTileFound && tileIsNotLastTile(tileFound)) {
 							//remove all tiles up to the previous position of this tile in the array
-							Debug.Log("Removing tiles: " + tileFoundIndex + " - " + tilesTouched.Count + tileFoundIndex);
+							//Debug.Log("Removing tiles: " + tileFoundIndex + " - " + tilesTouched.Count + tileFoundIndex);
 							tilesTouched.RemoveRange (tileFoundIndex, tilesTouched.Count - tileFoundIndex);
 						}
 						else
@@ -176,6 +180,23 @@ public class Board : MonoBehaviour {
 	/// </summary>
 	void DrawLines()
 	{
+		arrayLine.ZeroPoints();
+		if(tilesTouched.Count >= 2)
+		{
+			for (int i = 0; i < tilesTouched.Count; i++)
+			{
+				if(tilesTouched[i] != null)
+				{
+					arrayLine.points3[i] = tilesTouched[i].transform.position;
+					arrayLine.points3[i].z = -4;
+				}
+			}
+			arrayLine.points3[tilesTouched.Count] = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			arrayLine.points3[tilesTouched.Count].z = -4;
+			arrayLine.drawEnd = tilesTouched.Count;
+		}
+		arrayLine.Draw();
+		/*
 		LineRenderer l = fireLine.GetComponent<LineRenderer> ();
 		if (tilesTouched.Count >= 1) {
 			if(!l.enabled)
@@ -185,7 +206,9 @@ public class Board : MonoBehaviour {
 				fireLine.GetComponent<LineRenderer> ().SetPosition (i, new Vector3(tilesTouched [i].transform.position.x, tilesTouched [i].transform.position.y, -2));
 		} else
 			fireLine.GetComponent<LineRenderer> ().enabled = false;
+		*/
 			/*
+			 * 
 		Vector3 pos1;
 		Vector3 pos2;
 		for(int i = 0; i < tilesTouched.Count-1; i++)
@@ -211,6 +234,10 @@ public class Board : MonoBehaviour {
 	{
 		int arrayIndex = -1;
 		for (int i = 0; i < tileArray.Count; i++) {
+			if(tileArray[i] == null)
+			{
+				return -1;
+			}
 			if (toFind.name == tileArray [i].name) {
 					arrayIndex = i;
 					break;
@@ -297,7 +324,7 @@ public class Board : MonoBehaviour {
 					for(int i = y; i < GridHeight; i++){
 						if(tileBoard[x,i] != null)
 						{
-							Debug.Log ("Shifting Col: " + x + " Row: " + i + " to " + y);
+							//Debug.Log ("Shifting Col: " + x + " Row: " + i + " to " + y);
 							tileBoard[x,y] = tileBoard[x,i];
 							tileBoard[x,y].transform.name = string.Format ("Tile ({0},{1})", x, y);
 							tileBoard[x,i] = null;
@@ -320,7 +347,7 @@ public class Board : MonoBehaviour {
 					g.GetComponent<SliderJoint2D>().anchor = new Vector2(x-2.525f, y-2f);
 					string tileName = string.Format ("Tile ({0},{1})", x, y);
 					g.transform.name = tileName;
-					Debug.Log("Refilling with tile" + tileName);
+					//Debug.Log("Refilling with tile" + tileName);
 					g.transform.parent = gameObject.transform;
 					tileBoard [x, y] = g.GetComponent<Tile> ();
 				}
@@ -339,7 +366,7 @@ public class Board : MonoBehaviour {
 			float armorToAdd = (float)arrayLength * (player.salvageMultiplier * 7.0f + 1.15f);
 			if ((player.currentSalvage += armorToAdd) > player.maxSalvage) {
 					player.currentSalvage -= player.maxSalvage;
-					//TODO: player got a salvage level
+					NotificationCenter.DefaultCenter().PostNotification(this, "ArmorUp");
 				}
 		} else if (tileType == "EnemyWeapon")
 		{
@@ -358,8 +385,9 @@ public class Board : MonoBehaviour {
 			if((player.currentXP += xpToAdd) > player.maxXP)
 			{
 				player.currentXP -= player.maxXP;
-				//TODO: player got a new level
+				NotificationCenter.DefaultCenter().PostNotification(this, "LevelUp");
 			}
+
 		}
 		else if (tileType == "Time")
 		{

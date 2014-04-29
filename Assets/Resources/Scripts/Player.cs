@@ -151,6 +151,7 @@ public class Player : MonoBehaviour
 		{
 			NotificationCenter.DefaultCenter().AddObserver(this, "Pause");
 			NotificationCenter.DefaultCenter().AddObserver(this, "Unpause");
+			NotificationCenter.DefaultCenter().AddObserver(this, "LevelUp");
 
 			//Set up initial values (initalization above not working correctly.
 			level = 1;
@@ -182,6 +183,8 @@ public class Player : MonoBehaviour
 
 			currentHealth = maxHealth;
 			currentMana = maxMana;
+
+			InvokeRepeating("Regen", 0f, 1f);
 
 
 		}
@@ -234,6 +237,27 @@ public class Player : MonoBehaviour
 			}
 		}
 
+		void Regen()
+		{
+			if((currentHealth += healthRegen) > maxHealth)
+				currentHealth = maxHealth;
+			if((currentMana += manaRegen) > maxMana)
+				currentMana = maxMana;
+		}
+
+		void LevelUp()
+		{
+			//Change Attributes
+			if(charType == eCharTypes.Strength)
+			{
+				strength += 2.5f;
+				agility += 2.2f;
+				intelligence+= 1.6f;
+			}
+			updateStats();
+			Debug.Log("Leveled up");
+		}
+
 		/////////////////////////////////
 		//Pause
 		/////////////////////////////////
@@ -249,5 +273,7 @@ public class Player : MonoBehaviour
 		{
 			bPaused = false;
 		}
+
+		
 
 }
