@@ -9,18 +9,25 @@ public class Board : MonoBehaviour {
 	//Variables
 	public int GridWidth = 6;
 	public int GridHeight = 6;
+	//Prefabs
 	public GameObject tilePrefab;
 	public GameObject tileSpawn;
+
+	//Lines
 	public VectorLine arrayLine;
+	public VectorLine arrayLineTip;
+	public Material lineMat;
+
+	//Board
 	public Tile[,] tileBoard = new Tile[6,6]; 
 	public List<Tile> tilesTouched = new List<Tile>();
-	public bool objectRemoved;
 	public Player player;
-	public bool bShifting = false;
-	public bool bPaused = false;
-	bool trace = false;
-	bool bFirstTile = false;
-	string tileType = "";
+
+	private bool bShifting = false;
+	private bool bPaused = false;
+	private bool trace = false;
+	private bool bFirstTile = false;
+	private string tileType = "";
 	private float GridXOffset = -2.525f;
 	private float GridYOffset = 2.0f;
 
@@ -47,9 +54,10 @@ public class Board : MonoBehaviour {
 			}
 				
 		}
-		arrayLine = new VectorLine("MyLine", new Vector3[100], Color.green, null, 5.0f, LineType.Continuous, Joins.Fill);
+		arrayLine = new VectorLine("MyLine", new Vector3[100], Color.green, lineMat, 15.0f, LineType.Continuous, Joins.Fill);
+		arrayLineTip = new VectorLine("MyLine", new Vector3[100], Color.red, lineMat, 15.0f, LineType.Continuous, Joins.Fill);
 		arrayLine.ZeroPoints();
-
+		arrayLineTip.ZeroPoints();
 		
 		gameObject.transform.position = new Vector3 (GridXOffset, GridYOffset, 0);
 	}
@@ -181,6 +189,7 @@ public class Board : MonoBehaviour {
 	void DrawLines()
 	{
 		arrayLine.ZeroPoints();
+		arrayLineTip.ZeroPoints();
 		if(tilesTouched.Count >= 2)
 		{
 			for (int i = 0; i < tilesTouched.Count; i++)
@@ -191,11 +200,17 @@ public class Board : MonoBehaviour {
 					arrayLine.points3[i].z = -4;
 				}
 			}
-			arrayLine.points3[tilesTouched.Count] = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			arrayLine.points3[tilesTouched.Count].z = -4;
-			arrayLine.drawEnd = tilesTouched.Count;
+			arrayLineTip.points3[0] = tilesTouched[tilesTouched.Count-1].transform.position;
+			arrayLineTip.points3[0].z = -4;
+			arrayLineTip.points3[1] = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+			arrayLineTip.points3[1].z = -4;
+			arrayLine.drawEnd = tilesTouched.Count-1;
+			arrayLineTip.drawEnd = 1;
+
 		}
 		arrayLine.Draw();
+		arrayLineTip.Draw();
+
 		/*
 		LineRenderer l = fireLine.GetComponent<LineRenderer> ();
 		if (tilesTouched.Count >= 1) {

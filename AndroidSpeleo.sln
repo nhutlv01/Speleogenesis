@@ -1,7 +1,13 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{8B138885-B449-C4E8-4522-6E0D349C3C9A}") = "AndroidSpeleo", "Assembly-CSharp-firstpass.csproj", "{F297B850-DE03-32DA-1098-6E48DF5786A8}"
+EndProject
 Project("{8B138885-B449-C4E8-4522-6E0D349C3C9A}") = "AndroidSpeleo", "Assembly-CSharp.csproj", "{CABFAA7F-6D03-D13B-A34A-8CB0CBCF0E36}"
+EndProject
+Project("{8B138885-B449-C4E8-4522-6E0D349C3C9A}") = "AndroidSpeleo", "Assembly-UnityScript-firstpass.unityproj", "{960E471E-FD4B-C4B3-A203-2B1ED2A81B8B}"
+EndProject
+Project("{8B138885-B449-C4E8-4522-6E0D349C3C9A}") = "AndroidSpeleo", "Assembly-UnityScript.unityproj", "{37D0AD09-86CB-E2CF-DF35-FFD93A7394C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +15,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F297B850-DE03-32DA-1098-6E48DF5786A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F297B850-DE03-32DA-1098-6E48DF5786A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F297B850-DE03-32DA-1098-6E48DF5786A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F297B850-DE03-32DA-1098-6E48DF5786A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CABFAA7F-6D03-D13B-A34A-8CB0CBCF0E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CABFAA7F-6D03-D13B-A34A-8CB0CBCF0E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CABFAA7F-6D03-D13B-A34A-8CB0CBCF0E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CABFAA7F-6D03-D13B-A34A-8CB0CBCF0E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{960E471E-FD4B-C4B3-A203-2B1ED2A81B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{960E471E-FD4B-C4B3-A203-2B1ED2A81B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{960E471E-FD4B-C4B3-A203-2B1ED2A81B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{960E471E-FD4B-C4B3-A203-2B1ED2A81B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D0AD09-86CB-E2CF-DF35-FFD93A7394C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D0AD09-86CB-E2CF-DF35-FFD93A7394C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D0AD09-86CB-E2CF-DF35-FFD93A7394C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D0AD09-86CB-E2CF-DF35-FFD93A7394C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																				GlobalSection(MonoDevelopProperties) = preSolution
+																																																																						GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

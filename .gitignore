@@ -222,9 +222,16 @@ Temp/
 ProjectSettings/
 Speleo_64_Data/
 Speleo_Data/
-
-#############
-## Sublime
-#############
+Speleogenesis_Data
+Speleogenesis.app
+Assets/Vectrosity
+Assets/VectrosityDemos
+Assets/Plugins
 .sublime-project
 AndroidSpeleo.apk
+AndroidSpeleo.apk
+*.apk
+*.sln
+*.unityproj
+*.userprefs
+*.csproj

@@ -68,11 +68,15 @@ public class Tile : MonoBehaviour {
 
 	public void dead()
 	{
+		Vector2 force = new Vector2(Random.Range(-100, 100), Random.Range(-100,100));
+		Rigidbody2D rb = GetComponent<Rigidbody2D> ();
 		transform.position = new Vector3 (transform.position.x, transform.position.y, transform.position.z + 1);
 		GetComponent<Animator> ().SetTrigger("Death");
 		GetComponent<CircleCollider2D> ().enabled = false;
-		GetComponent<Rigidbody2D> ().gravityScale = 0;
-		GetComponent<Rigidbody2D> ().AddForce(new Vector2(Random.Range(0, 2), Random.Range(0,2)));
+		rb.gravityScale = 0;
+		rb.fixedAngle = false;
+		rb.AddForce(force);
+		rb.AddTorque(Random.Range(-100,100));
 		Destroy (this.gameObject, .533f);
 	}
 
