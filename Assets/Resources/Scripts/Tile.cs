@@ -73,6 +73,7 @@ public class Tile : MonoBehaviour {
 		transform.position = new Vector3 (transform.position.x, transform.position.y, transform.position.z + 1);
 		GetComponent<Animator> ().SetTrigger("Death");
 		GetComponent<CircleCollider2D> ().enabled = false;
+		GetComponent<SliderJoint2D>().enabled = false;
 		rb.gravityScale = 0;
 		rb.fixedAngle = false;
 		rb.AddForce(force);

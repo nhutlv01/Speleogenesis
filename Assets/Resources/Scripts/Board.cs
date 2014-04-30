@@ -16,7 +16,8 @@ public class Board : MonoBehaviour {
 	//Lines
 	public VectorLine arrayLine;
 	public VectorLine arrayLineTip;
-	public Material lineMat;
+	public Material arrayLineMat;
+	public Material arrayTipMat;
 
 	//Board
 	public Tile[,] tileBoard = new Tile[6,6]; 
@@ -54,8 +55,8 @@ public class Board : MonoBehaviour {
 			}
 				
 		}
-		arrayLine = new VectorLine("MyLine", new Vector3[100], Color.green, lineMat, 15.0f, LineType.Continuous, Joins.Fill);
-		arrayLineTip = new VectorLine("MyLine", new Vector3[100], Color.red, lineMat, 15.0f, LineType.Continuous, Joins.Fill);
+		arrayLine = new VectorLine("MyLine", new Vector3[100], Color.green, arrayLineMat, 15.0f, LineType.Continuous, Joins.Fill);
+		arrayLineTip = new VectorLine("MyLine", new Vector3[100], Color.red, arrayTipMat, 15.0f, LineType.Continuous, Joins.Fill);
 		arrayLine.ZeroPoints();
 		arrayLineTip.ZeroPoints();
 		

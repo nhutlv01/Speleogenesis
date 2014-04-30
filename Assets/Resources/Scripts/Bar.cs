@@ -17,7 +17,7 @@ public class Bar : MonoBehaviour {
 		text.transform.position = text.transform.parent.position + Vector3.back;
 		text.GetComponent<Renderer>().sortingLayerName = "GUI";
 		text.GetComponent<Renderer>().sortingOrder = 1;
-		Debug.Log ("Text Transform Position: " + text.transform.position.x + " " + text.transform.position.y + " " + text.transform.position.z);
+		//Debug.Log ("Text Transform Position: " + text.transform.position.x + " " + text.transform.position.y + " " + text.transform.position.z);
 
 		textmesh.font = Resources.Load ("Fonts/Lemiesz") as Font;
 		textmesh.renderer.material = textmesh.font.material;
