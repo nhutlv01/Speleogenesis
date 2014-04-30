@@ -12,6 +12,7 @@ public class Board : MonoBehaviour {
 	//Prefabs
 	public GameObject tilePrefab;
 	public GameObject tileSpawn;
+	public GameObject dimPrefab;
 
 	//Lines
 	public VectorLine arrayLine;
@@ -23,6 +24,7 @@ public class Board : MonoBehaviour {
 	public Tile[,] tileBoard = new Tile[6,6]; 
 	public List<Tile> tilesTouched = new List<Tile>();
 	public Player player;
+	public GameObject dim;
 
 	private bool bShifting = false;
 	private bool bPaused = false;
@@ -40,10 +42,12 @@ public class Board : MonoBehaviour {
 	/// 
 	/// </summary>
 	void Start () {
+		//Add observers
 		NotificationCenter.DefaultCenter().AddObserver(this, "Pause");
 		NotificationCenter.DefaultCenter().AddObserver(this, "Unpause");
 		gameObject.transform.position = new Vector3 (0, 0, 1f);
 
+		//Create tileboard
 		for (int x = 0; x < GridWidth; x++) {
 			for (int y = 0; y < GridHeight; y++)
 			{
@@ -55,10 +59,19 @@ public class Board : MonoBehaviour {
 			}
 				
 		}
+		//Create line object
 		arrayLine = new VectorLine("MyLine", new Vector3[100], Color.green, arrayLineMat, 15.0f, LineType.Continuous, Joins.Fill);
 		arrayLineTip = new VectorLine("MyLine", new Vector3[100], Color.red, arrayTipMat, 15.0f, LineType.Continuous, Joins.Fill);
 		arrayLine.ZeroPoints();
 		arrayLineTip.ZeroPoints();
+
+		//Initialize dimmer
+		dim = Instantiate(dimPrefab,  new Vector3(-GridXOffset, -1.509109f, -2f), Quaternion.identity) as GameObject;
+		dim.transform.name = "Dimmer";
+		dim.transform.parent = gameObject.transform;
+		dim.renderer.enabled = false;
+		dim.renderer.sortingLayerName = "Default";
+		dim.renderer.sortingOrder = 0;
 		
 		gameObject.transform.position = new Vector3 (GridXOffset, GridYOffset, 0);
 	}
@@ -99,12 +112,14 @@ public class Board : MonoBehaviour {
 				//Ending click, end dragging, clear array, delete tiles
 		} else if (Input.GetMouseButtonUp (0) && trace && bMatched3) {
 				trace = false;
+				unDimPieces(tileType);
 				breakdownTileScore(tileType,tilesTouched.Count);
 				deleteAllTiles (tilesTouched);
 				tilesTouched.Clear ();
 				tileType = "";
 		} else if (Input.GetMouseButtonUp (0) && trace && !bMatched3) {
 				trace = false;
+				unDimPieces(tileType);
 				tilesTouched.Clear ();
 				tileType = "";
 		}
@@ -143,6 +158,8 @@ public class Board : MonoBehaviour {
 					//Debug.Log ("First Tile");
 					//Set the type of drag to this tile's type
 					tileType = tileFound.type;
+					//Dim the pieces
+					dimPieces(tileType);
 					//Add tile to the array
 					tilesTouched.Add (tileFound);
 					//indicate we are no longer dealing with the first tile
@@ -424,6 +441,42 @@ public class Board : MonoBehaviour {
 			}
 		}
 		return counter;
+	}
+
+	void dimPieces(string type)
+	{
+		Vector3 pos;
+
+		//Enable the renderer
+		dim.renderer.enabled = true;
+
+		//For all tiles of the same tiletype, move them past the dimmer
+		foreach(Tile t in tileBoard)
+		{
+			if(t.type == type)
+			{
+				pos = t.transform.position;
+				t.transform.position = new Vector3(pos.x, pos.y, pos.z -3);
+			}
+		}
+	}
+
+	void unDimPieces(string type)
+	{
+		Vector3 pos;
+		
+		//Enable the renderer
+		dim.renderer.enabled = false;
+		
+		//For all tiles of the same tiletype, move them back to original position
+		foreach(Tile t in tileBoard)
+		{
+			if(t.type == type)
+			{
+				pos = t.transform.position;
+				t.transform.position = new Vector3(pos.x, pos.y, pos.z + 3);
+			}
+		}
 	}
 
 	/////////////////////////////////
