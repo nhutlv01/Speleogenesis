@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
 	void TimerTrigger()
 	{
 		player.applyDamage(board.numEnemies() * enemyAttack);
+		enemyAttack = player.level * 5 + 10;
 	}
 
 	void PlayerDeath()

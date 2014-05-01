@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Vectrosity;
@@ -13,6 +13,7 @@ public class Board : MonoBehaviour {
 	public GameObject tilePrefab;
 	public GameObject tileSpawn;
 	public GameObject dimPrefab;
+	public GameObject lifeBarPrefab;
 
 	//Lines
 	public VectorLine arrayLine;
@@ -25,6 +26,7 @@ public class Board : MonoBehaviour {
 	public List<Tile> tilesTouched = new List<Tile>();
 	public Player player;
 	public GameObject dim;
+	public LifeBar lifeBar;
 
 	private bool bShifting = false;
 	private bool bPaused = false;
@@ -60,8 +62,8 @@ public class Board : MonoBehaviour {
 				
 		}
 		//Create line object
-		arrayLine = new VectorLine("MyLine", new Vector3[100], Color.green, arrayLineMat, 15.0f, LineType.Continuous, Joins.Fill);
-		arrayLineTip = new VectorLine("MyLine", new Vector3[100], Color.red, arrayTipMat, 15.0f, LineType.Continuous, Joins.Fill);
+		arrayLine = new VectorLine("MyLine", new Vector3[100], Color.green, arrayLineMat, 5.0f, LineType.Continuous, Joins.Fill);
+		arrayLineTip = new VectorLine("MyLine", new Vector3[100], Color.red, arrayTipMat, 5.0f, LineType.Continuous, Joins.Fill);
 		arrayLine.ZeroPoints();
 		arrayLineTip.ZeroPoints();
 
@@ -72,6 +74,11 @@ public class Board : MonoBehaviour {
 		dim.renderer.enabled = false;
 		dim.renderer.sortingLayerName = "Default";
 		dim.renderer.sortingOrder = 0;
+
+		//Initialize lifebar
+		lifeBar.renderer.enabled = false;
+		lifeBar.renderer.sortingLayerName = "GUI";
+		lifeBar.renderer.sortingOrder = 1;
 		
 		gameObject.transform.position = new Vector3 (GridXOffset, GridYOffset, 0);
 	}
@@ -113,12 +120,14 @@ public class Board : MonoBehaviour {
 		} else if (Input.GetMouseButtonUp (0) && trace && bMatched3) {
 				trace = false;
 				unDimPieces(tileType);
+				disableLifeBar();
 				breakdownTileScore(tileType,tilesTouched.Count);
 				deleteAllTiles (tilesTouched);
 				tilesTouched.Clear ();
 				tileType = "";
 		} else if (Input.GetMouseButtonUp (0) && trace && !bMatched3) {
 				trace = false;
+				disableLifeBar();
 				unDimPieces(tileType);
 				tilesTouched.Clear ();
 				tileType = "";
@@ -144,6 +153,10 @@ public class Board : MonoBehaviour {
 			bool bTileFound = false;
 			//Calculate position of mouse
 			pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+
+			//Draw lifebar
+			drawLifeBar(pos);
+
 			//Cast a ray at mouse position
 			rayHit = Physics2D.Raycast (pos, Vector2.zero);
 
@@ -456,7 +469,7 @@ public class Board : MonoBehaviour {
 			if(t.type == type)
 			{
 				pos = t.transform.position;
-				t.transform.position = new Vector3(pos.x, pos.y, pos.z -3);
+				t.transform.position = new Vector3(pos.x, pos.y, -4);
 			}
 		}
 	}
@@ -474,9 +487,22 @@ public class Board : MonoBehaviour {
 			if(t.type == type)
 			{
 				pos = t.transform.position;
-				t.transform.position = new Vector3(pos.x, pos.y, pos.z + 3);
+				t.transform.position = new Vector3(pos.x, pos.y, -1);
 			}
 		}
+	}
+
+	void drawLifeBar(Vector3 mousePos)
+	{
+		lifeBar.transform.position = new Vector3( mousePos.x, mousePos.y, -4);
+		lifeBar.percent = player.currentHealth / player.maxHealth * 100;
+		lifeBar.renderer.enabled = true;
+
+	}
+
+	void disableLifeBar()
+	{
+		lifeBar.renderer.enabled = false;
 	}
 
 	/////////////////////////////////
