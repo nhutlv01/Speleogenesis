@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
 		//Attack Related
 		/////////////////////////////////
 		/// 
-		public void applyDamage (int damage)
+		public void applyDamage (float damage)
 		{
 			currentHealth = currentHealth - damage;
 			if(currentHealth <= 0)

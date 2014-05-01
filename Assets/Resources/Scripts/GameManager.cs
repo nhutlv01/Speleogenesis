@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 	public Camera mainCamera;
 	public bool bPaused = false;
 
-	public int enemyAttack = 10;
+	public float enemyAttack = 10.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 	void TimerTrigger()
 	{
 		player.applyDamage(board.numEnemies() * enemyAttack);
-		enemyAttack = player.level * 5 + 10;
+		enemyAttack = player.level * 5f + 10f;
 	}
 
 	void PlayerDeath()
