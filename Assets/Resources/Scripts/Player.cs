@@ -247,6 +247,7 @@ public class Player : MonoBehaviour
 
 		void LevelUp()
 		{
+			level += 1;
 			//Change Attributes
 			if(charType == eCharTypes.Strength)
 			{

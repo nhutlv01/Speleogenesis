@@ -3,13 +3,14 @@ using System.Collections;
 
 public class Timer : MonoBehaviour {
 
-	public float timerTimeLeft;
-	public float timerMax;
+	public float timerTimeLeft = 3.0f;
+	public float timerMax = 3.0f;
 	public float barScale;
 	public GameObject barObject;
 	public TextMesh textMesh;
 	public bool bPaused = false;
 	public float timerDecreaseLevel;
+	bool bPreAttack = false;
 	// Use this for initialization
 	void Start () {
 		NotificationCenter.DefaultCenter().AddObserver(this, "Pause");
@@ -18,6 +19,7 @@ public class Timer : MonoBehaviour {
 
 		textMesh = this.GetComponent<TextMesh> ();
 		textMesh.text = timerMax.ToString();
+		 
 		/*textMesh.font = Resources.Load ("Fonts/Lemiesz") as Font;
 		textMesh.renderer.material = textMesh.font.material;
 		textMesh.characterSize = 0.02f;
@@ -34,33 +36,38 @@ public class Timer : MonoBehaviour {
 			{
 				ResetTimer();
 			}
-			else{
-				Color colorLerp;
-				timerTimeLeft = timerTimeLeft - Time.deltaTime;
-				if(timerTimeLeft < timerMax)
+			else if(timerTimeLeft <= 1.30f)
+			{
+				if(!bPreAttack)
 				{
-					barObject.transform.localScale = new Vector3 (timerTimeLeft / timerMax * barScale + .001f, barObject.transform.localScale.y, barObject.transform.localScale.z);
-					colorLerp = Color.Lerp(Color.red, Color.green, timerTimeLeft % timerMax / timerMax);
+					bPreAttack = true;
+					Debug.Log("PreEnemyAttack");
+					NotificationCenter.DefaultCenter().PostNotification (this, "PreEnemyAttack");
 				}
-				else
-				{
-					barObject.transform.localScale = new Vector3 (timerTimeLeft % timerMax / timerMax * barScale + .001f, barObject.transform.localScale.y, barObject.transform.localScale.z);
-					colorLerp = Color.Lerp(Color.green, Color.cyan, timerTimeLeft % timerMax / timerMax);
-				}
-				barObject.GetComponent<SpriteRenderer>().color = colorLerp;
-				textMesh.text = timerTimeLeft.ToString ("F2");
-				textMesh.color = colorLerp;
 			}
+			Color colorLerp;
+			timerTimeLeft = Mathf.Round((timerTimeLeft - Time.deltaTime) * 1000f) / 1000f;
+			if(timerTimeLeft < timerMax)
+			{
+				barObject.transform.localScale = new Vector3 (timerTimeLeft / timerMax * barScale + .001f, barObject.transform.localScale.y, barObject.transform.localScale.z);
+				colorLerp = Color.Lerp(Color.red, Color.green, timerTimeLeft % timerMax / timerMax);
+			}
+			else
+			{
+				barObject.transform.localScale = new Vector3 (timerTimeLeft % timerMax / timerMax * barScale + .001f, barObject.transform.localScale.y, barObject.transform.localScale.z);
+				colorLerp = Color.Lerp(Color.green, Color.cyan, timerTimeLeft % timerMax / timerMax);
+			}
+			barObject.GetComponent<SpriteRenderer>().color = colorLerp;
+			textMesh.text = timerTimeLeft.ToString ("F2");
+			textMesh.color = colorLerp;
 		}
 	}
-
-	void Countdown()
-	{
-	}
+	
 
 	void ResetTimer()
 	{
 		NotificationCenter.DefaultCenter().PostNotification (this, "TimerTrigger");
+		bPreAttack = false;
 		timerTimeLeft = timerMax;
 	}
 

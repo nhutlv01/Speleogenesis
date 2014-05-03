@@ -17,8 +17,8 @@ public class Tile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		CreateTile ();
 		NotificationCenter.DefaultCenter().AddObserver(this, "TimerTrigger");
+		NotificationCenter.DefaultCenter().AddObserver(this, "PreEnemyAttack");
 		//GameObject s = Instantiate(paperTilePrefab, gameObject.transform.position, new Quaternion(0,0,Random.Range(0,3)*90,0)) as GameObject;
 		//s.transform.parent = transform;
 	}
@@ -39,22 +39,7 @@ public class Tile : MonoBehaviour {
 	{
 		Neighbors.RemoveAt (i);
 	}
-
-	void CreateTile()
-	{
-		string tilePath;
-		type = TileTypes [Random.Range (0, TileTypes.Length)];
-		SpriteRenderer sr = GetComponent<SpriteRenderer>();
-		//if this is a 
-		if (type == "EnemyWeapon") {
-			subtype = SubTypes [Random.Range(0, SubTypes.Length)];
-			tilePath = "TileTypes/" + subtype;
-		}
-		else
-			tilePath = "TileTypes/" + type;
-		sr.sprite = Resources.Load<Sprite>(tilePath);
-	}
-
+	
 	public void checkNeighbors()
 	{
 		for(int i = 0; i < Neighbors.Count; i++)
@@ -79,6 +64,12 @@ public class Tile : MonoBehaviour {
 		rb.AddForce(force);
 		rb.AddTorque(Random.Range(-100,100));
 		Destroy (this.gameObject, .533f);
+	}
+
+	void PreEnemyAttack()
+	{
+		if(subtype =="Enemy")
+			GetComponent<Animator> ().SetTrigger("PreEnemyAttack");
 	}
 
 	public void TimerTrigger()

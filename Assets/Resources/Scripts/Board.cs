@@ -427,7 +427,7 @@ public class Board : MonoBehaviour {
 			//Calculate number of dead enemies
 
 			//Add xp equivalent to number of enemies killed.
-			float xpToAdd = (float)arrayLength* (player.xpMultiplier * 7.0f + 1.15f);
+			float xpToAdd = (float)arrayLength* (player.xpMultiplier * 3.0f + 1.15f);
 			if((player.currentXP += xpToAdd) > player.maxXP)
 			{
 				player.currentXP -= player.maxXP;
@@ -437,7 +437,7 @@ public class Board : MonoBehaviour {
 		}
 		else if (tileType == "Time")
 		{
-			float timeToAdd = (float)arrayLength * player.timeMultiplier;
+			float timeToAdd = (float)arrayLength * player.timeMultiplier * .3f;
 			NotificationCenter.DefaultCenter().PostNotification(this, "AddTime", timeToAdd);
 		}
 	}
