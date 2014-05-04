@@ -9,18 +9,11 @@ public class Tile : MonoBehaviour {
 	public string[] SubTypes = {"Enemy", "Weapon"};
 	public string type = "";
 	public string subtype ="";
-	public int row;
-	public int column;
-	public GameObject burn;
-
-	//public GameObject paperTilePrefab;
 
 	// Use this for initialization
 	void Start () {
 		NotificationCenter.DefaultCenter().AddObserver(this, "TimerTrigger");
 		NotificationCenter.DefaultCenter().AddObserver(this, "PreEnemyAttack");
-		//GameObject s = Instantiate(paperTilePrefab, gameObject.transform.position, new Quaternion(0,0,Random.Range(0,3)*90,0)) as GameObject;
-		//s.transform.parent = transform;
 	}
 
 	//Add neighbors to list

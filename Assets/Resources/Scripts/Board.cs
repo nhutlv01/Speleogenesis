@@ -9,6 +9,10 @@ public class Board : MonoBehaviour {
 	//Variables
 	public int GridWidth = 6;
 	public int GridHeight = 6;
+	private string tileType = "";
+	private float GridXOffset = -2.525f;
+	private float GridYOffset = 2.0f;
+	
 	//Prefabs
 	public GameObject tilePrefab;
 	public GameObject tileSpawn;
@@ -28,13 +32,11 @@ public class Board : MonoBehaviour {
 	public GameObject dim;
 	public LifeBar lifeBar;
 
+	//State booleans
 	private bool bShifting = false;
 	private bool bPaused = false;
 	private bool trace = false;
 	private bool bFirstTile = false;
-	private string tileType = "";
-	private float GridXOffset = -2.525f;
-	private float GridYOffset = 2.0f;
 
 
 	/// <summary>
@@ -47,6 +49,8 @@ public class Board : MonoBehaviour {
 		//Add observers
 		NotificationCenter.DefaultCenter().AddObserver(this, "Pause");
 		NotificationCenter.DefaultCenter().AddObserver(this, "Unpause");
+
+		//Move gameboard into position
 		gameObject.transform.position = new Vector3 (0, 0, 1f);
 
 		//Create tileboard
@@ -116,8 +120,9 @@ public class Board : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0) && !trace) {
 				trace = true;
 				bFirstTile = true;
-				//Ending click, end dragging, clear array, delete tiles
+		//If mouse release, and we were tracing, and there are 3 matches.
 		} else if (Input.GetMouseButtonUp (0) && trace && bMatched3) {
+				//Ending click, end dragging, clear array, delete tiles.
 				trace = false;
 				unDimPieces(tileType);
 				disableLifeBar();
@@ -126,6 +131,7 @@ public class Board : MonoBehaviour {
 				tilesTouched.Clear ();
 				tileType = "";
 		} else if (Input.GetMouseButtonUp (0) && trace && !bMatched3) {
+				//Ending click, end dragging, clear array, delete tiles.
 				trace = false;
 				disableLifeBar();
 				unDimPieces(tileType);
