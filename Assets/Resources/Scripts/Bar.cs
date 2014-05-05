@@ -32,7 +32,8 @@ public class Bar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		barObject.transform.localScale = new Vector3 (percent * barScale *.01f +.001f, barObject.transform.localScale.y, barObject.transform.localScale.z);
-		textmesh.text = ("(" + Mathf.Round(current) + "," + max + ")");
+		barObject.GetComponent<SpriteRenderer>().color = Color.Lerp(Color.red, Color.green, percent/100);
+		//textmesh.text = ("(" + Mathf.Round(current) + "," + max + ")");
 
 	}
 }

@@ -129,6 +129,7 @@ public class Board : MonoBehaviour {
 				breakdownTileScore(tileType,tilesTouched.Count);
 				deleteAllTiles (tilesTouched);
 				tilesTouched.Clear ();
+				timeScaleResume();
 				tileType = "";
 		} else if (Input.GetMouseButtonUp (0) && trace && !bMatched3) {
 				//Ending click, end dragging, clear array, delete tiles.
@@ -136,6 +137,7 @@ public class Board : MonoBehaviour {
 				disableLifeBar();
 				unDimPieces(tileType);
 				tilesTouched.Clear ();
+				timeScaleResume();
 				tileType = "";
 		}
 
@@ -174,6 +176,8 @@ public class Board : MonoBehaviour {
 				//if this is the first tile
 				if(bFirstTile)
 				{
+					//Slow time!
+					timeScaleSlow();
 					//Debug.Log ("First Tile");
 					//Set the type of drag to this tile's type
 					tileType = tileFound.type;
@@ -395,7 +399,7 @@ public class Board : MonoBehaviour {
 			for (int x = 0; x < GridWidth; x++)
 			{
 				if (tileBoard [x, y] == null) {
-					GameObject g = Instantiate (tilePrefab, new Vector3 (x-2.525f, y + 3.7f, -1), Quaternion.identity)as GameObject;
+					GameObject g = Instantiate (tilePrefab, new Vector3 (x-2.525f, y + 1.0f, -1), Quaternion.identity)as GameObject;
 					g.GetComponent<SliderJoint2D>().anchor = new Vector2(x-2.525f, y-2f);
 					string tileName = string.Format ("Tile ({0},{1})", x, y);
 					g.transform.name = tileName;
@@ -509,6 +513,16 @@ public class Board : MonoBehaviour {
 	void disableLifeBar()
 	{
 		lifeBar.renderer.enabled = false;
+	}
+
+	void timeScaleSlow()
+	{
+		Time.timeScale = .5f;
+	}
+
+	void timeScaleResume()
+	{
+		Time.timeScale = 1.0f;
 	}
 
 	/////////////////////////////////
