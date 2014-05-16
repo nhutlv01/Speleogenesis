@@ -208,11 +208,12 @@ public class Player : MonoBehaviour
 				b.max = maxHealth;
 				b.percent = currentHealth / maxHealth * 100;
 				/// Mana
-				b = manaBar.GetComponentInChildren<Bar> ();
+				/*b = manaBar.GetComponentInChildren<Bar> ();
 				b.current = currentMana;
 				b.max = maxMana;
 				b.percent = currentMana / maxMana * 100;
-				//XP
+				*/
+				/*//XP
 				b = xpBar.GetComponentInChildren<Bar> ();
 				b.current = currentXP;
 				b.max = maxXP;
@@ -222,6 +223,7 @@ public class Player : MonoBehaviour
 				b.current = currentSalvage;
 				b.max = maxSalvage;
 				b.percent = currentSalvage / maxSalvage * 100;
+				*/
 		}
 		/////////////////////////////////
 		//Attack Related
