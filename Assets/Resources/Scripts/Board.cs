@@ -15,7 +15,6 @@ public class Board : MonoBehaviour {
 	
 	//Prefabs
 	public GameObject tilePrefab;
-	public GameObject tileSpawn;
 	public GameObject dimPrefab;
 	public GameObject lifeBarPrefab;
 
@@ -38,6 +37,12 @@ public class Board : MonoBehaviour {
 	private bool trace = false;
 	private bool bFirstTile = false;
 
+	/// <summary>
+	/// Board Constructor
+	/// </summary>
+	public Board(){
+
+	}
 
 	/// <summary>
 	/// void Start ()
@@ -54,12 +59,13 @@ public class Board : MonoBehaviour {
 		gameObject.transform.position = new Vector3 (0, 0, 1f);
 
 		//Create tileboard
+		Debug.Log("Creating TileBoard");
 		for (int x = 0; x < GridWidth; x++) {
 			for (int y = 0; y < GridHeight; y++)
 			{
 				GameObject g = Instantiate(tilePrefab, new Vector3(x,y,0), Quaternion.identity)as GameObject;
 				g.transform.name = string.Format("Tile ({0},{1})",x,y);
-				g.transform.parent =gameObject.transform;
+				g.transform.parent = gameObject.transform;
 				tileBoard[x,y] = g.GetComponent<Tile>();
 				g.GetComponent<SliderJoint2D>().anchor = new Vector2(x+GridXOffset, y);
 			}
@@ -476,10 +482,13 @@ public class Board : MonoBehaviour {
 		//For all tiles of the same tiletype, move them past the dimmer
 		foreach(Tile t in tileBoard)
 		{
-			if(t.type == type)
+			if(t != null)
 			{
-				pos = t.transform.position;
-				t.transform.position = new Vector3(pos.x, pos.y, -4);
+				if(t.type == type)
+				{
+					pos = t.transform.position;
+					t.transform.position = new Vector3(pos.x, pos.y, -4);
+				}
 			}
 		}
 	}

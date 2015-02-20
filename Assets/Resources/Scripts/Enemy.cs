@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour {
 	//Armor
 	public float armor;
 
-
 	/*
 	 * Enemy::Enemy()
 	 * Constructor
@@ -22,7 +21,6 @@ public class Enemy : MonoBehaviour {
 	{
 		Debug.Log ("Enemy Constructor Called");
 	}
-
 
 	public virtual void Attack()
 	{
